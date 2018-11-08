@@ -1,0 +1,77 @@
+<form [ngrxFormState]="formState" (submit)="submitForm.emit()">
+  <mat-form-field>
+    <mat-select placeholder="Choose an option"
+        [ngrxFormControlState]="formState.controls.personalDetails.controls.title">
+      <mat-option *ngFor="let title of titles" [value]="title">{{title}}</mat-option>
+    </mat-select>
+    <mat-error>
+        Please choose a Title
+      </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Enter First Name"
+        [ngrxFormControlState]="formState.controls.personalDetails.controls.firstName">
+        <mat-error>
+          Please enter a First Name
+        </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Enter Last Name"
+           [ngrxFormControlState]="formState.controls.personalDetails.controls.lastName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Enter Email"
+           [ngrxFormControlState]="formState.controls.personalDetails.controls.email">
+    <mat-error>
+      Please enter a valid email
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matAutocomplete]="auto"
+        placeholder="Enter Occupation"
+        [ngrxFormControlState]="formState.controls.personalDetails.controls.occupation">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let user of filteredOptions"
+        [value]="user.name">
+        <span>{{ user.name }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Choose an option"
+        [ngrxFormControlState]="formState.controls.personalDetails.controls.country">
+      <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+    </mat-select>
+    <mat-error>
+      Please choose a Country
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Enter Post Code"
+        [ngrxFormControlState]="formState.controls.personalDetails.controls.postCode">
+    <mat-error *ngIf="formState.errors?._personalDetails?._postCode?.required">
+      Please enter a Post Code
+    </mat-error>
+    <mat-error *ngIf="formState.errors._personalDetails?._postCode?.pattern">
+      Please enter a valid Post Code
+    </mat-error>
+    <mat-error *ngIf="formState.errors._personalDetails?._postCode?.minLength">
+      Minimum 6 characters
+    </mat-error>
+    <mat-error *ngIf="formState.errors._personalDetails?._postCode?.maxLength">
+      Maximum 10 characters
+    </mat-error>
+  </mat-form-field>
+
+  <div>
+    <button mat-raised-button
+            color="primary"
+            type="submit">Continue</button>
+  </div>
+</form>

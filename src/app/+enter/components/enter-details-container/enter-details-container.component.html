@@ -1,0 +1,7 @@
+<h2>Please Enter Your Details</h2>
+<app-enter-details
+    [titles]="titles"
+    [countries]="countries"
+    [formState]="formState$ | async"
+    [autocomplete]="autocomplete$ | async"
+    (submitForm)="onSubmit()"></app-enter-details>
